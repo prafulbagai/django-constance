@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.core.exceptions import ImproperlyConfigured
 
 from django.utils.translation import gettext_lazy as _
@@ -14,6 +15,8 @@ except ImportError:
 class Constance(models.Model):
     key = models.CharField(max_length=255, unique=True)
     value = PickledObjectField(null=True, blank=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = _('constance')
